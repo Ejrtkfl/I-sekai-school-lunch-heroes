@@ -16,7 +16,9 @@ public class init {
      */
     private void createStudents(int grade, int classroom, int amount){
         Student student = new Student(grade,classroom);
-        int nowLocationNum = student.routeAL.get(0);
+
+        String nowLocationNum = student.routeAL.get(0).getLocationNumber();
+
         Location location = DataSlot.locationHM.get(nowLocationNum);
         for (int i=0;i<amount;i++){
             location.add(student);
@@ -68,12 +70,142 @@ public class init {
         createStudents(3,12,31);
         createStudents(3,13,31);
     }
-    private void createLocation(int building, int floor, int locationNumber){
+    private void createLocation(int building, int floor, String locationNumber){
         Location location = new Location(building, floor, locationNumber);
         DataSlot.locationHM.put(location.locationNumber,location);
     }
     private void setupLocation(){
-        createLocation(0,1,100);
-        createLocation(1,2,101);
+        createLocation(0,1,"000");
+        createLocation(0,1,"001");
+
+        createLocation(0,1,"100");
+        createLocation(0,1,"101");
+        createLocation(0,1,"102");
+
+        createLocation(0,1,"200");
+
+
+        createLocation(0,2,"000");
+
+        createLocation(0,2,"100");
+        createLocation(0,2,"101");
+        createLocation(0,2,"102");
+        createLocation(0,2,"103");
+        createLocation(0,2,"104");
+        createLocation(0,2,"105");
+
+        createLocation(0,2,"200");
+        createLocation(0,2,"201");
+
+        createLocation(0,2,"300");
+
+
+        createLocation(0,3,"000");
+        createLocation(0,3,"001");
+        createLocation(0,3,"002");
+        createLocation(0,3,"003");
+        createLocation(0,3,"004");
+        createLocation(0,3,"005");
+        createLocation(0,3,"006");
+        createLocation(0,3,"007");
+        createLocation(0,3,"008");
+        createLocation(0,3,"009");
+
+        createLocation(0,3,"100");
+        createLocation(0,3,"101");
+        createLocation(0,3,"102");
+        createLocation(0,3,"103");
+        createLocation(0,3,"104");
+        createLocation(0,3,"105");
+        createLocation(0,3,"106");
+        createLocation(0,3,"107");
+        createLocation(0,3,"108");
+
+        createLocation(0,3,"200");
+        createLocation(0,3,"201");
+
+
+        createLocation(0,4,"000");
+        createLocation(0,4,"001");
+        createLocation(0,4,"002");
+        createLocation(0,4,"003");
+        createLocation(0,4,"004");
+        createLocation(0,4,"005");
+        createLocation(0,4,"006");
+        createLocation(0,4,"007");
+        createLocation(0,4,"008");
+        createLocation(0,4,"009");
+        createLocation(0,4,"010");
+        createLocation(0,4,"011");
+
+        createLocation(0,4,"100");
+        createLocation(0,4,"101");
+        createLocation(0,4,"102");
+        createLocation(0,4,"103");
+        createLocation(0,4,"104");
+        createLocation(0,4,"105");
+        createLocation(0,4,"106");
+        createLocation(0,4,"107");
+        createLocation(0,4,"108");
+
+        createLocation(0,4,"200");
+        createLocation(0,4,"201");
+
+
+        createLocation(0,5,"000");
+        createLocation(0,5,"001");
+        createLocation(0,5,"002");
+        createLocation(0,5,"003");
+        createLocation(0,5,"004");
+        createLocation(0,5,"005");
+        createLocation(0,5,"006");
+        createLocation(0,5,"007");
+        createLocation(0,5,"008");
+        createLocation(0,5,"009");
+
+        createLocation(0,5,"100");
+        createLocation(0,5,"101");
+        createLocation(0,5,"102");
+        createLocation(0,5,"103");
+        createLocation(0,5,"104");
+        createLocation(0,5,"105");
+        createLocation(0,5,"106");
+        createLocation(0,5,"107");
+        createLocation(0,5,"108");
+
+        createLocation(0,5,"200");
+        createLocation(0,5,"201");
+
+
+        createLocation(1,2,"100");
+        createLocation(1,2,"101");
+        createLocation(1,2,"102");
+        createLocation(1,2,"103");
+        createLocation(1,2,"104");
+
+        createLocation(1,2,"200");
+
+
+        createLocation(1,3,"000");
+        createLocation(1,3,"001");
+        createLocation(1,3,"002");
+
+        createLocation(1,3,"100");
+        createLocation(1,3,"101");
+        createLocation(1,3,"102");
+
+        createLocation(1,3,"200");
+
+
+        createLocation(1,4,"000");
+        createLocation(1,4,"001");
+        createLocation(1,4,"002");
+
+        createLocation(1,4,"100");
+        createLocation(1,4,"101");
+        createLocation(1,4,"102");
+        createLocation(1,4,"103");
+
+        createLocation(1,4,"200");
     }
 }

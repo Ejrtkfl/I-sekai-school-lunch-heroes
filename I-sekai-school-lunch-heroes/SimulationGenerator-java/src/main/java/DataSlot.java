@@ -11,7 +11,7 @@ public class DataSlot {
      * 학생들 현재 위치 방 단위로 저장
      * 매 틱마다 급식실에 가까운 순서대로 이동 연산
      */
-    public static HashMap<Integer,Location> locationHM = new HashMap<>(); // LocationNumber / LocationData
+    public static HashMap<String,Location> locationHM = new HashMap<>(); // LocationNumber / LocationData
     /**
      * 학생 인구 밀도
      */
