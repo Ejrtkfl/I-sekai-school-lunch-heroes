@@ -12,6 +12,7 @@ public class DataSlot {
      * 매 틱마다 급식실에 가까운 순서대로 이동 연산
      */
     public static HashMap<String,Location> locationHM = new HashMap<>(); // LocationNumber / LocationData
+    public static ArrayList<Student> studentAL = new ArrayList<>();
     /**
      * 학생 인구 밀도
      */

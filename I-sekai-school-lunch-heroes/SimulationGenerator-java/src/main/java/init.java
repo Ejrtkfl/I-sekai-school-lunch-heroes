@@ -4,7 +4,6 @@ import java.util.HashMap;
 public class init {
 
     public void init(){
-        setupLocation();
         setupStudents();
     }
 
@@ -17,13 +16,12 @@ public class init {
     private void createStudents(int grade, int classroom, int amount){
         Student student = new Student(grade,classroom);
 
-        String nowLocationNum = student.routeAL.get(0).getLocationNumber();
-
-        Location location = DataSlot.locationHM.get(nowLocationNum);
+        /*String locationString = student.routeAL.get(0);
+        Location location = DataSlot.locationHM.get(locationString);*/
         for (int i=0;i<amount;i++){
-            location.add(student);
+            DataSlot.studentAL.add(student);
         }
-        DataSlot.locationHM.put(nowLocationNum,location);
+        //DataSlot.locationHM.put(locationString,location);
     }
 
     private void setupStudents(){
@@ -70,9 +68,11 @@ public class init {
         createStudents(3,12,31);
         createStudents(3,13,31);
     }
+    /*
     private void createLocation(int building, int floor, String locationNumber){
         Location location = new Location(building, floor, locationNumber);
-        DataSlot.locationHM.put(location.locationNumber,location);
+        String locationString = String.format("%d%d%s",location.building,location.floor,location.locationNumber);
+        DataSlot.locationHM.put(locationString,location);
     }
     private void setupLocation(){
         createLocation(0,1,"000");
@@ -207,5 +207,5 @@ public class init {
         createLocation(1,4,"103");
 
         createLocation(1,4,"200");
-    }
+    }*/
 }
