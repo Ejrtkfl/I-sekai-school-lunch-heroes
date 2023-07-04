@@ -1,3 +1,6 @@
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +16,12 @@ public class DataSlot {
      */
     public static HashMap<String,Location> locationHM = new HashMap<>(); // LocationNumber / LocationData
     public static ArrayList<Student> studentAL = new ArrayList<>();
+
+    public static MultiValueMap<Integer,String> startSequence3 = new LinkedMultiValueMap<>(); // tick / LocationString
+    public static MultiValueMap<Integer,String> startSequence2 = new LinkedMultiValueMap<>(); // tick / LocationString
+    public static MultiValueMap<Integer,String> startSequence1 = new LinkedMultiValueMap<>(); // tick / LocationString
+    public static MultiValueMap<Integer,Student> eatingStudent = new LinkedMultiValueMap<>();
+
     /**
      * 학생 인구 밀도
      */

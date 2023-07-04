@@ -19,7 +19,7 @@ public class Location {
             this.capacity = 40*DataSlot.MaxDensity;
         }
         else if(Integer.parseInt(locationString)%100==3){// 급식실
-            this.capacity = 600;
+            this.capacity = 100;
         }
     }
 

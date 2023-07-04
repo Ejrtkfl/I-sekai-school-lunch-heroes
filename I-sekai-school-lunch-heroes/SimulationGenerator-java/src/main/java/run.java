@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class run {
     boolean done = false;
@@ -74,18 +75,22 @@ public class run {
 
             // modified
 
+            RandSPoint randSPoint = new RandSPoint();
+            randSPoint.startMoving(tick);
+
+            finishEating();
             tick++;
         }
     }
 
-    private void moveStudents(Location location){
+    public void moveStudents(Location location){
         int remain = location.capacity - location.studentAL.size();
         for (int i = 0;i < remain;i++){
             moveStudent(location);
         }
     }
 
-    private void moveStudent(Location location){
+    public void moveStudent(Location location){
         for (Student student : DataSlot.studentAL){
             String beforeRoute = student.routeAL.get(0);
             String afterRoute = student.routeAL.get(1);
@@ -100,7 +105,19 @@ public class run {
                 DataSlot.locationHM.put(afterRoute,afterLocation.add(student));
 
                 DataSlot.studentAL.add(student);
+                if(afterRoute.equals("02300")){
+                    DataSlot.eatingStudent.add(tick+100,student);
+                }
                 break;
+            }
+        }
+    }
+
+    public void finishEating(){
+        if(DataSlot.eatingStudent.containsKey(tick)){
+            List<Student> students = DataSlot.eatingStudent.get(tick);
+            for (Student student : students){
+                DataSlot.locationHM.get("02300").studentAL.remove(student);
             }
         }
     }

@@ -5,6 +5,7 @@ public class init {
 
     public void init(){
         setupStudents();
+        setupStartSequence();
     }
 
     /**
@@ -67,6 +68,52 @@ public class init {
         createStudents(3,11,31);
         createStudents(3,12,31);
         createStudents(3,13,31);
+    }
+
+    private void setupStartSequence(){
+        DataSlot.startSequence3.add(0,"05000");
+        DataSlot.startSequence3.add(0,"05001");
+        DataSlot.startSequence3.add(0,"05002");
+        DataSlot.startSequence3.add(0,"05003");
+        DataSlot.startSequence3.add(0,"05004");
+        DataSlot.startSequence3.add(0,"05005");
+        DataSlot.startSequence3.add(0,"05006");
+        DataSlot.startSequence3.add(0,"05007");
+        DataSlot.startSequence3.add(0,"05008");
+        DataSlot.startSequence3.add(0,"05009");
+        DataSlot.startSequence3.add(0,"04009");
+        DataSlot.startSequence3.add(0,"04008");
+        DataSlot.startSequence3.add(0,"04007");
+
+        DataSlot.startSequence2.add(0,"03000");
+        DataSlot.startSequence2.add(0,"03001");
+        DataSlot.startSequence2.add(0,"03002");
+        DataSlot.startSequence2.add(0,"03003");
+        DataSlot.startSequence2.add(0,"03004");
+        DataSlot.startSequence2.add(0,"04010");
+        DataSlot.startSequence2.add(0,"04011");
+        DataSlot.startSequence2.add(0,"04000");
+        DataSlot.startSequence2.add(0,"04001");
+        DataSlot.startSequence2.add(0,"04002");
+        DataSlot.startSequence2.add(0,"04003");
+        DataSlot.startSequence2.add(0,"04004");
+        DataSlot.startSequence2.add(0,"04005");
+        DataSlot.startSequence2.add(0,"04006");
+
+        DataSlot.startSequence1.add(0,"13000");
+        DataSlot.startSequence1.add(0,"13001");
+        DataSlot.startSequence1.add(0,"13002");
+        DataSlot.startSequence1.add(0,"14000");
+        DataSlot.startSequence1.add(0,"14001");
+        DataSlot.startSequence1.add(0,"14012");
+        DataSlot.startSequence1.add(0,"03005");
+        DataSlot.startSequence1.add(0,"03006");
+        DataSlot.startSequence1.add(0,"03007");
+        DataSlot.startSequence1.add(0,"03008");
+        DataSlot.startSequence1.add(0,"03009");
+        DataSlot.startSequence1.add(0,"02000");
+        DataSlot.startSequence1.add(0,"01000");
+        DataSlot.startSequence1.add(0,"01001");
     }
     /*
     private void createLocation(int building, int floor, String locationNumber){
