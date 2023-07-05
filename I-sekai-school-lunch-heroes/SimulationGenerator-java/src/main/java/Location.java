@@ -1,35 +1,32 @@
 import java.util.ArrayList;
 import java.util.HashSet;
-
+@Deprecated
 public class Location {
-    String locationString;
-    int capacity;
-    ArrayList<Student> studentAL = new ArrayList<>();
 
-    Location(String locationString){
-        this.locationString = locationString;
-
-        if(Integer.parseInt(locationString)%100==0){// 반
-            this.capacity = 50*DataSlot.MaxDensity;
+    public int getCapacity(String locationID){
+        int capacity = 0;
+        if(locationID.charAt(2) == '0'){// 반
+            capacity = 50*DataSlot.MaxDensity;
         }
-        else if(Integer.parseInt(locationString)%100==1){// 복도
-            this.capacity = 100*DataSlot.MaxDensity;
+        else if(locationID.charAt(2) == '1'){// 복도
+            capacity = 100*DataSlot.MaxDensity;
         }
-        else if(Integer.parseInt(locationString)%100==2){// 계단
-            this.capacity = 40*DataSlot.MaxDensity;
+        else if(locationID.charAt(2) == '2'){// 계단
+            capacity = 40*DataSlot.MaxDensity;
         }
-        else if(Integer.parseInt(locationString)%100==3){// 급식실
-            this.capacity = 100;
+        else if(locationID.charAt(2) == '3'){// 급식실
+            capacity = 100;
         }
+        return capacity;
     }
-
-    public Location add(Student student){
-        studentAL.add(student);
-        return this;
-    }
-
-    public Location remove(Student student){
-        studentAL.remove(student);
-        return this;
-    }
+/*
+    public ArrayList<String> getStudents(String locationID){
+        ArrayList<String> students = new ArrayList<>();
+        for (Student student : DataSlot.studentAL){
+            if(student.nowLocation().equals(locationID)){
+                students.add(student.studentID);
+            }
+        }
+        return students;
+    }*/
 }
