@@ -1,3 +1,9 @@
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class init {
 
     public void init(){
@@ -27,7 +33,7 @@ public class init {
             String IDPrefix = String.format("1%02d",i);
             createStudents(IDPrefix,35);
         }
-        for (int i = 1;i <= 13;i++){
+        for (int i = 1;i <= 14;i++){
             String IDPrefix = String.format("2%02d",i);
             createStudents(IDPrefix,33);
         }
@@ -38,7 +44,7 @@ public class init {
     }
 
     /**
-     * 학생들 출발 속도 초기화 / 기본값은 1322명의 학생들이 동시에 출발한다
+     * 학생들 출발 속도 초기화 / 기본값은 1355명의 학생들이 동시에 출발한다
      */
     private void setupStartSequence(){
         DataSlot.startSequence3.add(0,"05000");
@@ -75,7 +81,7 @@ public class init {
         DataSlot.startSequence1.add(0,"13002");
         DataSlot.startSequence1.add(0,"14000");
         DataSlot.startSequence1.add(0,"14001");
-        DataSlot.startSequence1.add(0,"14012");
+        DataSlot.startSequence1.add(0,"14002");
         DataSlot.startSequence1.add(0,"03005");
         DataSlot.startSequence1.add(0,"03006");
         DataSlot.startSequence1.add(0,"03007");
@@ -84,5 +90,21 @@ public class init {
         DataSlot.startSequence1.add(0,"02000");
         DataSlot.startSequence1.add(0,"01000");
         DataSlot.startSequence1.add(0,"01001");
+    }
+
+    public void reset(){
+        DataSlot.StudentHM = new HashMap<>(); // ID / Student
+        DataSlot.WalkingStudentHM = new HashSet<>(); // ID
+        DataSlot.EatingStudentMVM = new LinkedMultiValueMap<>(); // Time / ID
+        DataSlot.FinishedStudentHM = new HashSet<>(); // ID
+        DataSlot.StudentMovingCountHM = new HashMap<>(); // ID / Count
+        DataSlot.LocationMVM = new LinkedMultiValueMap<>(); // LocationID / StudentsID
+
+        DataSlot.startSequence3 = new LinkedMultiValueMap<>(); // tick / LocationString
+        DataSlot.startSequence2 = new LinkedMultiValueMap<>(); // tick / LocationString
+        DataSlot.startSequence1 = new LinkedMultiValueMap<>(); // tick / LocationString
+
+        run.done = false;
+        run.tick = 0;
     }
 }

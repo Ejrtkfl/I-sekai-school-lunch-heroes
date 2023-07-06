@@ -22,14 +22,14 @@ public class RandSPoint {
                 firstMoving(classLocation);
             }
         }
-        if(DataSlot.startSequence3.containsKey(tick)){
-            List<String> classes = DataSlot.startSequence3.get(tick);
+        if(DataSlot.startSequence2.containsKey(tick)){
+            List<String> classes = DataSlot.startSequence2.get(tick);
             for (String classLocation : classes){
                 firstMoving(classLocation);
             }
         }
-        if(DataSlot.startSequence3.containsKey(tick)){
-            List<String> classes = DataSlot.startSequence3.get(tick);
+        if(DataSlot.startSequence1.containsKey(tick)){
+            List<String> classes = DataSlot.startSequence1.get(tick);
             for (String classLocation : classes){
                 firstMoving(classLocation);
             }

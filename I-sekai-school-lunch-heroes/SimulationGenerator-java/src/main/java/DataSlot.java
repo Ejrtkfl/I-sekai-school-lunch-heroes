@@ -20,7 +20,7 @@ public class DataSlot {
      */
     public static MultiValueMap<Integer,String> EatingStudentMVM = new LinkedMultiValueMap<>(); // Time / ID
     /**
-     * 식사를 마친 학생들. Size가 1322가 되면 시뮬레이션 종료
+     * 식사를 마친 학생들. Size가 1355가 되면 시뮬레이션 종료
      */
     public static HashSet<String> FinishedStudentHM = new HashSet<>(); // ID
     /**
