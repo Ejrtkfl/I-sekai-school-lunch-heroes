@@ -6,6 +6,7 @@ public class run {
      * 급식실에서 가까운 순서대로 이동 및 정해진 타이밍에 맞춰 반 출발
      */
     public void run(){
+        log.logging(tick);
         while(!done){
 
             RandSPoint.startMoving(tick);
@@ -78,17 +79,23 @@ public class run {
             moveStudents("05107");
             moveStudents("05108");
 
-            System.out.println(String.format("Walking : %d  Eating : %d  Finished : %d",
+            log.logging(tick);
+
+            /*System.out.println(String.format("Walking : %d  Eating : %d  Finished : %d",
                     DataSlot.WalkingStudentHM.size(),
                     DataSlot.EatingStudentMVM.size(),
                     DataSlot.FinishedStudentHM.size()));
             System.out.println(DataSlot.LocationMVM.get("02100"));
 
-            /*System.out.println(String.format("%s %d %s",
+            System.out.println(String.format("%s %d %s",
                     DataSlot.StudentHM.get("20201").studentID,
                     DataSlot.StudentMovingCountHM.get("20201"),
                     DataSlot.StudentHM.get("20201").locationAL.get(DataSlot.StudentMovingCountHM.get("20201"))));*/
             tick++;
+            System.out.println(tick);
+            if(tick==200){
+                log.logger();
+            }
         }
     }
     /**
