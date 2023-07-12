@@ -3,16 +3,17 @@ import java.util.HashSet;
 @Deprecated
 public class Location {
 
+    @Deprecated
     public int getCapacity(String locationID){
         int capacity = 0;
         if(locationID.charAt(2) == '0'){// 반
-            capacity = 50*DataSlot.MaxDensity;
+            capacity = 50;
         }
         else if(locationID.charAt(2) == '1'){// 복도
-            capacity = 100*DataSlot.MaxDensity;
+            capacity = 100;
         }
         else if(locationID.charAt(2) == '2'){// 계단
-            capacity = 40*DataSlot.MaxDensity;
+            capacity = 40;
         }
         else if(locationID.charAt(2) == '3'){// 급식실
             capacity = 100;

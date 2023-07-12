@@ -20,9 +20,9 @@ public class log {
         logBuilder.append(log);
     }
 
-    public static void logger(){
+    public static void saveFile(){
         try {
-            File file = new File("C:\\Users\\user\\Downloads\\I-sekai-school-lunch-heroes-main\\I-sekai-school-lunch-heroeslog.txt");
+            File file = new File("C:\\Users\\rice\\OneDrive\\바탕 화면\\Github\\log.txt");
 
             if (!file.exists()) {
                 file.createNewFile();

@@ -38,5 +38,10 @@ public class MovingCamera : MonoBehaviour
             transform.position = new Vector3(15.8f, 84.9f, -5.6f);
             transform.eulerAngles = new Vector3(4.168f,-292f,-0.5f);
         }
+        if (Input.GetKey(KeyCode.Alpha6))
+        {
+            transform.position = new Vector3(-40f, 80f, -20f);
+            transform.eulerAngles = new Vector3(40f, 60f, 0f);
+        }
     }
 }

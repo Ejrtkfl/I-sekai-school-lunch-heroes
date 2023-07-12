@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class run {
     public static boolean done = false;
     public static int tick = 0;
@@ -10,11 +12,11 @@ public class run {
         while(!done){
 
             RandSPoint.startMoving(tick);
-
             finishEating();
-            if(DataSlot.FinishedStudentHM.size()==1355){
+            if(DataSlot.FinishedStudentHS.size()==1355){
                 System.out.println(tick);
             }
+            moveStudents("02300");
 
             moveStudents("02100");
             moveStudents("02101");
@@ -81,7 +83,8 @@ public class run {
 
             log.logging(tick);
 
-            /*System.out.println(String.format("Walking : %d  Eating : %d  Finished : %d",
+            /*
+            System.out.println(String.format("Walking : %d  Eating : %d  Finished : %d",
                     DataSlot.WalkingStudentHM.size(),
                     DataSlot.EatingStudentMVM.size(),
                     DataSlot.FinishedStudentHM.size()));
@@ -90,11 +93,12 @@ public class run {
             System.out.println(String.format("%s %d %s",
                     DataSlot.StudentHM.get("20201").studentID,
                     DataSlot.StudentMovingCountHM.get("20201"),
-                    DataSlot.StudentHM.get("20201").locationAL.get(DataSlot.StudentMovingCountHM.get("20201"))));*/
+                    DataSlot.StudentHM.get("20201").locationAL.get(DataSlot.StudentMovingCountHM.get("20201"))));
+            */
             tick++;
             System.out.println(tick);
             if(tick==200){
-                log.logger();
+                log.saveFile();
             }
         }
     }
@@ -103,24 +107,52 @@ public class run {
      * @param locationID 해당 장소
      */
     public static void moveStudents(String locationID){
-        if (DataSlot.LocationMVM.get(locationID)==null) return;
+        Utils utils = new Utils();
+        if (utils.getStudents(locationID)==null) return;
 
-        for (String studentID : DataSlot.getStudents(locationID)){
-            if (!DataSlot.WalkingStudentHM.contains(studentID)) return;
+        // 배열 도중 편집 문제
+        List<String> students = utils.getStudents(locationID);
+        for (String studentID : students){
+            if (!DataSlot.WalkingStudentHS.contains(studentID)) ;
+
             int movingCount = DataSlot.StudentMovingCountHM.get(studentID);
-            String afterLocationID = DataSlot.StudentHM.get(studentID).locationAL.get(movingCount+1);
+            try {
+                String afterLocationID = "";
+                afterLocationID = DataSlot.StudentMVM.get(studentID).get(movingCount+1);
 
-            int capacity=0;
+                int capacity = 0;
+                if (afterLocationID.charAt(2) == '0') capacity = 1000;
+                else if (afterLocationID.charAt(2) == '1') capacity = 1000;
+                else if (afterLocationID.charAt(2) == '2') capacity = 1000;
+                else if (afterLocationID.charAt(2) == '3') capacity = 1000;
 
-            if (afterLocationID.charAt(2) == '0') capacity = 40;
-            else if (afterLocationID.charAt(2) == '1') capacity = 50;
-            else if (afterLocationID.charAt(2) == '2') capacity = 50;
-            else if (afterLocationID.charAt(2) == '3') capacity = 600;
+                int size = 0;
+                try{
+                    for (String countingID : DataSlot.LocationMVM.get(afterLocationID)){
+                        if(countingID != null) {
+                            size++;
+                        }
+                    }
+                } catch (NullPointerException ignored){}
 
-            int afterLocationRemain = capacity;
-            if (DataSlot.LocationMVM.get(afterLocationID)!=null)
-                afterLocationRemain = afterLocationRemain - DataSlot.LocationMVM.get(afterLocationID).size();
+                int afterLocationRemain = capacity - size;
 
+                if(afterLocationRemain>0){
+                    utils.move(studentID);
+
+                    /*if (afterLocationID.equals("02300")) {
+                        DataSlot.LocationMVM.remove(locationID, studentID);
+
+                        DataSlot.StudentMovingCountHM.put(studentID, movingCount + 1);
+
+                        DataSlot.WalkingStudentHM.remove(studentID);
+                        DataSlot.EatingStudentMVM.add(run.tick + 30, studentID);
+                    }*/
+                }
+            } catch (IndexOutOfBoundsException exception){ // 현재 급식실
+                DataSlot.EatingStudentMVM.add(tick+30,studentID);
+                DataSlot.WalkingStudentHS.remove(studentID);
+            }
             /*if(printingCount <= 550){
                 int size = DataSlot.LocationMVM.get(afterLocationID) == null ?
                         0 : DataSlot.LocationMVM.get(afterLocationID).size();
@@ -132,22 +164,9 @@ public class run {
                 printingCount++;
             }*/
 
-            if (afterLocationID.equals("02300")){
-                DataSlot.LocationMVM.remove(locationID,studentID);
-
-                DataSlot.StudentMovingCountHM.put(studentID, movingCount+1);
-
-                DataSlot.WalkingStudentHM.remove(studentID);
-                DataSlot.EatingStudentMVM.add(run.tick + 30, studentID);
-            }
-            else if(afterLocationRemain>0){
-                DataSlot.LocationMVM.remove(locationID,studentID);
-
-                DataSlot.StudentMovingCountHM.put(studentID, movingCount+1);
-                DataSlot.LocationMVM.add(afterLocationID,studentID);
                 /*System.out.println(String.format("%s moved to %s from %s, %d remain",
                         studentID,locationID,afterLocationID,afterLocationRemain));*/
-            }
+
 
         }
 
@@ -157,10 +176,9 @@ public class run {
      */
     public void finishEating(){
         if (DataSlot.EatingStudentMVM.get(tick)==null) return;
-
-        System.out.println(DataSlot.EatingStudentMVM.get(tick).toString());
+        // System.out.println(DataSlot.EatingStudentMVM.get(tick).toString());
         for (String studentID : DataSlot.EatingStudentMVM.get(tick)){
-            DataSlot.FinishedStudentHM.add(studentID);
+            DataSlot.FinishedStudentHS.add(studentID);
             DataSlot.LocationMVM.remove("02300",studentID);
         }
         DataSlot.EatingStudentMVM.remove(tick);

@@ -1,12 +1,13 @@
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class init {
-
-    public void init(){
+    Student student = new Student();
+    public void setup(){
         setupStudents();
         setupStartSequence();
     }
@@ -17,12 +18,6 @@ public class init {
      * @param amount 반 학생 수
      */
     private void createStudents(String IDPrefix, int amount){
-        for (int i=1;i<=amount;i++){
-            Student student = new Student(String.format("%s%02d",IDPrefix,i));
-            DataSlot.StudentHM.put(student.studentID,student);
-            DataSlot.StudentMovingCountHM.put(student.studentID,0);
-            DataSlot.LocationMVM.add(student.locationAL.get(0),student.studentID);
-        }
     }
 
     /**
@@ -30,16 +25,31 @@ public class init {
      */
     private void setupStudents(){
         for (int i = 1;i <= 14;i++){
-            String IDPrefix = String.format("1%02d",i);
-            createStudents(IDPrefix,35);
+            for (int j=1;j<=35;j++){
+                String ID = String.format("1%02d%02d",i,j);
+                ArrayList<String> routeAL = student.getRouteAL(ID);
+                DataSlot.StudentMVM.put(ID,routeAL);
+                DataSlot.StudentMovingCountHM.put(ID,0);
+                DataSlot.LocationMVM.add(routeAL.get(0),ID);
+            }
         }
         for (int i = 1;i <= 14;i++){
-            String IDPrefix = String.format("2%02d",i);
-            createStudents(IDPrefix,33);
+            for (int j=1;j<=33;j++){
+                String ID = String.format("2%02d%02d",i,j);
+                ArrayList<String> routeAL = student.getRouteAL(ID);
+                DataSlot.StudentMVM.put(ID,routeAL);
+                DataSlot.StudentMovingCountHM.put(ID,0);
+                DataSlot.LocationMVM.add(routeAL.get(0),ID);
+            }
         }
         for (int i = 1;i <= 13;i++){
-            String IDPrefix = String.format("3%02d",i);
-            createStudents(IDPrefix,31);
+            for (int j=1;j<=31;j++){
+                String ID = String.format("3%02d%02d",i,j);
+                ArrayList<String> routeAL = student.getRouteAL(ID);
+                DataSlot.StudentMVM.put(ID,routeAL);
+                DataSlot.StudentMovingCountHM.put(ID,0);
+                DataSlot.LocationMVM.add(routeAL.get(0),ID);
+            }
         }
     }
 
@@ -93,10 +103,10 @@ public class init {
     }
 
     public void reset(){
-        DataSlot.StudentHM = new HashMap<>(); // ID / Student
-        DataSlot.WalkingStudentHM = new HashSet<>(); // ID
+        DataSlot.StudentMVM = new LinkedMultiValueMap<>(); // ID / Student
+        DataSlot.WalkingStudentHS = new HashSet<>(); // ID
         DataSlot.EatingStudentMVM = new LinkedMultiValueMap<>(); // Time / ID
-        DataSlot.FinishedStudentHM = new HashSet<>(); // ID
+        DataSlot.FinishedStudentHS = new HashSet<>(); // ID
         DataSlot.StudentMovingCountHM = new HashMap<>(); // ID / Count
         DataSlot.LocationMVM = new LinkedMultiValueMap<>(); // LocationID / StudentsID
 

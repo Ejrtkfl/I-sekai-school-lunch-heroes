@@ -7,7 +7,6 @@ public class TextFileReader : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject studentPrefab;
-    TextAsset textFile;
     StringReader stringReader;
     float repeating;
     int tick=0;
@@ -15,8 +14,6 @@ public class TextFileReader : MonoBehaviour
 
     void Start()
     {
-
-
         for (int i = 1; i <= 14; i++)
         {
             for (int j = 1; j <= 35; j++){
@@ -39,44 +36,33 @@ public class TextFileReader : MonoBehaviour
             }
         }
 
-
-        //Debug.Log("start");
-        textFile = Resources.Load("log") as TextAsset;
+        TextAsset textFile = Resources.Load("log") as TextAsset;
         stringReader = new StringReader(textFile.text);
-        /*while (true)
-        {
-            string line = stringReader.ReadLine();
-            if (line == null)
-            {
-                break;
-            }
-            Debug.Log(line);
-        }*/
-        //Debug.Log("done");
     }
 
     // Update is called once per frame
     void Update()   
     {
         repeating += Time.deltaTime;
-        if(repeating >= 0.1f){
-            if(line == null) return;
-            while(!line.Contains("t:")){
+        if(repeating >= 1f){
+            while(true){
                 line = stringReader.ReadLine();
+                if(line == null) return;
+
                 string location = line.Split(':')[0];
                 string student = line.Split(':')[1];
-                Debug.Log(location);
-                Debug.Log(student);
+                if(location.Equals("t")) break;
+
                 GameObject locationObject = GameObject.Find(location);
                 GameObject studentObject = GameObject.Find(string.Format("s{0}",student));
-                studentObject.transform.position = 
-                    new Vector3(Random.Range(locationObject.transform.position.x-2f,locationObject.transform.position.x+2f),
-                                locationObject.transform.position.y-2f,
-                                Random.Range(locationObject.transform.position.z-2f,locationObject.transform.position.z+2f));
+
+                float x = Random.Range(locationObject.transform.position.x - 5f, locationObject.transform.position.x + 5f);
+                float z = Random.Range(locationObject.transform.position.z - 5f, locationObject.transform.position.z + 5f);
+
+                studentObject.transform.position = new Vector3(x,locationObject.transform.position.y,z);
             }
             repeating = 0;
             tick++;
-            line = stringReader.ReadLine();
         }
     }
 }

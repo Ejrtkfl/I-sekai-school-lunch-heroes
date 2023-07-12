@@ -1,29 +1,12 @@
 import java.util.ArrayList;
-/**
- * 학생 데이터
- * 학번 / 이동 경로
- */
-public class Student {
 
-    String studentID;//30319
-    ArrayList<String> locationAL;
-
-    /**
-     * 학생 데이터 생성 / 이동 경로 자동 지정
-     * @param studentID 학번
-     */
-    Student(String studentID){
-        this.studentID = studentID;
-        this.locationAL = setupRouteAL(studentID);
-    }
-
+public class Student{
     /**
      * 학생 이동 경로 반환
      * @param studentID 학번
      * @return 학생 이동 경로
      */
-    private ArrayList<String> setupRouteAL(String studentID){
-        // System.out.println(studentID);
+    public ArrayList<String> getRouteAL(String studentID){
         return switch (studentID.charAt(0)) {
             case '1' -> setupRouteGrade1(studentID.substring(1,3));
             case '2' -> setupRouteGrade2(studentID.substring(1,3));

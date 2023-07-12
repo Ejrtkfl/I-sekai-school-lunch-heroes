@@ -2,35 +2,28 @@ import java.util.List;
 
 public class RandSPoint {
 
-    //default
 
     public static void firstMoving(String classLocationID){
-        for (String studentID : DataSlot.getStudents(classLocationID)){
-            DataSlot.WalkingStudentHM.add(studentID);
-            DataSlot.LocationMVM.remove(classLocationID,studentID);
-
-            DataSlot.StudentMovingCountHM.put(studentID, 1);
-            String afterLocationID = DataSlot.getLocation(studentID);
-            DataSlot.LocationMVM.add(afterLocationID,studentID);
+        Utils utils = new Utils();
+        for (String studentID : utils.getStudents(classLocationID)){
+            utils.move(studentID);
+            DataSlot.WalkingStudentHS.add(studentID);
         }
     }
 
     public static void startMoving(int tick){
         if(DataSlot.startSequence3.containsKey(tick)){
-            List<String> classes = DataSlot.startSequence3.get(tick);
-            for (String classLocation : classes){
+            for (String classLocation : DataSlot.startSequence3.get(tick)){
                 firstMoving(classLocation);
             }
         }
         if(DataSlot.startSequence2.containsKey(tick)){
-            List<String> classes = DataSlot.startSequence2.get(tick);
-            for (String classLocation : classes){
+            for (String classLocation : DataSlot.startSequence2.get(tick)){
                 firstMoving(classLocation);
             }
         }
         if(DataSlot.startSequence1.containsKey(tick)){
-            List<String> classes = DataSlot.startSequence1.get(tick);
-            for (String classLocation : classes){
+            for (String classLocation : DataSlot.startSequence1.get(tick)){
                 firstMoving(classLocation);
             }
         }

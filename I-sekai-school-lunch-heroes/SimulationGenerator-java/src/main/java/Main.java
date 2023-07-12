@@ -3,7 +3,7 @@ public class Main {
         init init = new init();
         run run = new run();
 
-        init.init();
+        init.setup();
         run.run();
     }
 }
