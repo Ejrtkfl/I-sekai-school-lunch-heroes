@@ -22,7 +22,7 @@ public class log {
 
     public static void logger(){
         try {
-            File file = new File("C:\\Users\\rice\\OneDrive\\바탕 화면\\Github\\log.txt");
+            File file = new File("C:\\Users\\user\\Downloads\\I-sekai-school-lunch-heroes-main\\I-sekai-school-lunch-heroeslog.txt");
 
             if (!file.exists()) {
                 file.createNewFile();
