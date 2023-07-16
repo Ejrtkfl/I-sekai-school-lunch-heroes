@@ -40,7 +40,7 @@ public class MovingCamera : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Alpha6))
         {
-            transform.position = new Vector3(-40f, 80f, -20f);
+            transform.position = new Vector3(-50f, 100f, -20f);
             transform.eulerAngles = new Vector3(40f, 60f, 0f);
         }
     }

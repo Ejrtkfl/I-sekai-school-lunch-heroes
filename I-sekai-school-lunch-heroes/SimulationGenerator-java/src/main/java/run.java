@@ -1,20 +1,20 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class run {
     public static boolean done = false;
     public static int tick = 0;
-    private static int printingCount = 0;
     /**
      * 급식실에서 가까운 순서대로 이동 및 정해진 타이밍에 맞춰 반 출발
      */
-    public void run(){
+    public int run(){
         log.logging(tick);
         while(!done){
-
-            RandSPoint.startMoving(tick);
+            //System.out.println(DataSlot.StudentHMQ.get("30101").peek());
             finishEating();
-            if(DataSlot.FinishedStudentHS.size()==1355){
-                System.out.println(tick);
+            if(DataSlot.FinishedStudentHS.size()>=1000){
+                break;
             }
             moveStudents("02300");
 
@@ -52,34 +52,36 @@ public class run {
             moveStudents("03102");
             moveStudents("03101");
 
-            moveStudents("03103");
-            moveStudents("03104");
-            moveStudents("03105");
-            moveStudents("03106");
-            moveStudents("03107");
             moveStudents("03108");
+            moveStudents("03107");
+            moveStudents("03106");
+            moveStudents("03105");
+            moveStudents("03104");
+            moveStudents("03103");
 
             moveStudents("04100");
             moveStudents("04102");
             moveStudents("04101");
 
-            moveStudents("04103");
-            moveStudents("04104");
-            moveStudents("04105");
-            moveStudents("04106");
-            moveStudents("04107");
             moveStudents("04108");
+            moveStudents("04107");
+            moveStudents("04106");
+            moveStudents("04105");
+            moveStudents("04104");
+            moveStudents("04103");
 
             moveStudents("05100");
             moveStudents("05102");
             moveStudents("05101");
 
-            moveStudents("05103");
-            moveStudents("05104");
-            moveStudents("05105");
-            moveStudents("05106");
-            moveStudents("05107");
             moveStudents("05108");
+            moveStudents("05107");
+            moveStudents("05106");
+            moveStudents("05105");
+            moveStudents("05104");
+            moveStudents("05103");
+
+            RandSPoint.startMoving(tick);
 
             log.logging(tick);
 
@@ -96,11 +98,12 @@ public class run {
                     DataSlot.StudentHM.get("20201").locationAL.get(DataSlot.StudentMovingCountHM.get("20201"))));
             */
             tick++;
-            System.out.println(tick);
-            if(tick==200){
-                log.saveFile();
+            // System.out.println(tick);
+            if(tick==500){
+                break;
             }
         }
+        return tick;
     }
     /**
      * 해당 장소에 있는 학생들을 다음 공간으로 이동시킨다
@@ -110,64 +113,11 @@ public class run {
         Utils utils = new Utils();
         if (utils.getStudents(locationID)==null) return;
 
-        // 배열 도중 편집 문제
-        List<String> students = utils.getStudents(locationID);
-        for (String studentID : students){
-            if (!DataSlot.WalkingStudentHS.contains(studentID)) ;
-
-            int movingCount = DataSlot.StudentMovingCountHM.get(studentID);
-            try {
-                String afterLocationID = "";
-                afterLocationID = DataSlot.StudentMVM.get(studentID).get(movingCount+1);
-
-                int capacity = 0;
-                if (afterLocationID.charAt(2) == '0') capacity = 1000;
-                else if (afterLocationID.charAt(2) == '1') capacity = 1000;
-                else if (afterLocationID.charAt(2) == '2') capacity = 1000;
-                else if (afterLocationID.charAt(2) == '3') capacity = 1000;
-
-                int size = 0;
-                try{
-                    for (String countingID : DataSlot.LocationMVM.get(afterLocationID)){
-                        if(countingID != null) {
-                            size++;
-                        }
-                    }
-                } catch (NullPointerException ignored){}
-
-                int afterLocationRemain = capacity - size;
-
-                if(afterLocationRemain>0){
-                    utils.move(studentID);
-
-                    /*if (afterLocationID.equals("02300")) {
-                        DataSlot.LocationMVM.remove(locationID, studentID);
-
-                        DataSlot.StudentMovingCountHM.put(studentID, movingCount + 1);
-
-                        DataSlot.WalkingStudentHM.remove(studentID);
-                        DataSlot.EatingStudentMVM.add(run.tick + 30, studentID);
-                    }*/
-                }
-            } catch (IndexOutOfBoundsException exception){ // 현재 급식실
-                DataSlot.EatingStudentMVM.add(tick+30,studentID);
-                DataSlot.WalkingStudentHS.remove(studentID);
-            }
-            /*if(printingCount <= 550){
-                int size = DataSlot.LocationMVM.get(afterLocationID) == null ?
-                        0 : DataSlot.LocationMVM.get(afterLocationID).size();
-                System.out.println(String.format("%s %c %d %d %d",
-                        afterLocationID,afterLocationID.charAt(2),
-                        capacity,
-                        size,
-                        afterLocationRemain));
-                printingCount++;
-            }*/
-
-                /*System.out.println(String.format("%s moved to %s from %s, %d remain",
-                        studentID,locationID,afterLocationID,afterLocationRemain));*/
-
-
+        int size = utils.getStudents(locationID).size();
+        for (int i=0;i<size;i++) {
+            String student = utils.getStudents(locationID).get(0);
+            if (!DataSlot.WalkingStudentHS.contains(student)) return;
+            utils.move(student,false);
         }
 
     }
@@ -175,12 +125,14 @@ public class run {
      * EatingStudentMVM에 있는 학생을 FinishedStudentHM으로 옮긴다
      */
     public void finishEating(){
-        if (DataSlot.EatingStudentMVM.get(tick)==null) return;
-        // System.out.println(DataSlot.EatingStudentMVM.get(tick).toString());
-        for (String studentID : DataSlot.EatingStudentMVM.get(tick)){
+        /*Utils utils = new Utils();
+        utils.getStudents("00000");
+        if (DataSlot.EatingStudentHMAL.get(tick)==null) return;
+        System.out.println(DataSlot.EatingStudentHMAL.get(tick).toString());
+        for (String studentID : DataSlot.EatingStudentHMAL.get(tick)){
             DataSlot.FinishedStudentHS.add(studentID);
-            DataSlot.LocationMVM.remove("02300",studentID);
-        }
-        DataSlot.EatingStudentMVM.remove(tick);
+            utils.remove("02300",studentID);
+            utils.add("00000",studentID);
+        }*/
     }
 }

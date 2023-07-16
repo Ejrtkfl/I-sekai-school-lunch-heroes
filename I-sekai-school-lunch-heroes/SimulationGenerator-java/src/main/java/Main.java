@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args){
         init init = new init();
-        run run = new run();
+        genetic genetic = new genetic();
 
         init.setup();
-        run.run();
+        genetic.genetic();
     }
 }

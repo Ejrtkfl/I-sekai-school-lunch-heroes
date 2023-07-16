@@ -11,6 +11,7 @@ public class TextFileReader : MonoBehaviour
     float repeating;
     int tick=0;
     string line = "";
+    bool run = false;
 
     void Start()
     {
@@ -43,26 +44,36 @@ public class TextFileReader : MonoBehaviour
     // Update is called once per frame
     void Update()   
     {
-        repeating += Time.deltaTime;
-        if(repeating >= 1f){
-            while(true){
-                line = stringReader.ReadLine();
-                if(line == null) return;
+        if (Input.GetKey(KeyCode.Alpha7))
+        {
+            run = !run;
+        }
+        if (run)
+        {
+            repeating += Time.deltaTime;
+            if (repeating >= 0.5f)
+            {
+                while (true)
+                {
+                    line = stringReader.ReadLine();
+                    if (line == null) return;
 
-                string location = line.Split(':')[0];
-                string student = line.Split(':')[1];
-                if(location.Equals("t")) break;
+                    string location = line.Split(':')[0];
+                    string student = line.Split(':')[1];
+                    if (location.Equals("t")) break;
 
-                GameObject locationObject = GameObject.Find(location);
-                GameObject studentObject = GameObject.Find(string.Format("s{0}",student));
+                    GameObject locationObject = GameObject.Find(location);
+                    GameObject studentObject = GameObject.Find(string.Format("s{0}", student));
 
-                float x = Random.Range(locationObject.transform.position.x - 5f, locationObject.transform.position.x + 5f);
-                float z = Random.Range(locationObject.transform.position.z - 5f, locationObject.transform.position.z + 5f);
+                    float x = Random.Range(locationObject.transform.position.x - 5f, locationObject.transform.position.x + 5f);
+                    float z = Random.Range(locationObject.transform.position.z - 5f, locationObject.transform.position.z + 5f);
 
-                studentObject.transform.position = new Vector3(x,locationObject.transform.position.y,z);
+                    studentObject.transform.position = new Vector3(x, locationObject.transform.position.y, z);
+                }
+                repeating = 0;
+                Debug.Log(tick);
+                tick++;
             }
-            repeating = 0;
-            tick++;
         }
     }
 }

@@ -10,9 +10,9 @@ public class log {
     public static void logging(int tick){
         StringBuilder log = new StringBuilder();
         log.append(String.format("t:%d\n",tick));
-        for (String key : DataSlot.LocationMVM.keySet()){
-            if(DataSlot.LocationMVM.get(key)!=null){
-                for (String value : DataSlot.LocationMVM.get(key)){
+        for (String key : DataSlot.LocationHMAL.keySet()){
+            if(DataSlot.LocationHMAL.get(key)!=null){
+                for (String value : DataSlot.LocationHMAL.get(key)){
                     log.append(String.format("%s:%s\n",key,value));
                 }
             }
