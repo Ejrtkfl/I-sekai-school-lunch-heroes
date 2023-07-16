@@ -56,6 +56,7 @@ public class init {
      * 학생들 출발 속도 초기화 / 기본값은 1355명의 학생들이 동시에 출발한다
      */
     private void setupStartSequence(){
+        // 최적값
         DataSlot.startSequence3.put(5,"05001");
         DataSlot.startSequence3.put(8,"05000");
         DataSlot.startSequence3.put(11,"05002");
@@ -115,4 +116,50 @@ public class init {
         run.done = false;
         run.tick = 0;
     }
+    // 기본 값
+    /*
+        DataSlot.startSequence3.add(0,"05000");
+        DataSlot.startSequence3.add(0,"05001");
+        DataSlot.startSequence3.add(0,"05002");
+        DataSlot.startSequence3.add(0,"05003");
+        DataSlot.startSequence3.add(0,"05004");
+        DataSlot.startSequence3.add(0,"05005");
+        DataSlot.startSequence3.add(0,"05006");
+        DataSlot.startSequence3.add(0,"05007");
+        DataSlot.startSequence3.add(0,"05008");
+        DataSlot.startSequence3.add(0,"05009");
+        DataSlot.startSequence3.add(0,"04009");
+        DataSlot.startSequence3.add(0,"04008");
+        DataSlot.startSequence3.add(0,"04007");
+
+        DataSlot.startSequence2.put(40,"03001");
+        DataSlot.startSequence2.put(42,"03000");
+        DataSlot.startSequence2.put(44,"03002");
+        DataSlot.startSequence2.put(46,"03003");
+        DataSlot.startSequence2.put(48,"03004");
+        DataSlot.startSequence2.put(41,"04006");
+        DataSlot.startSequence2.put(43,"04005");
+        DataSlot.startSequence2.put(45,"04004");
+        DataSlot.startSequence2.put(47,"04003");
+        DataSlot.startSequence2.put(51,"04011");
+        DataSlot.startSequence2.put(55,"04002");
+        DataSlot.startSequence2.put(59,"04010");
+        DataSlot.startSequence2.put(61,"04001");
+        DataSlot.startSequence2.put(63,"04000");
+
+        DataSlot.startSequence1.put(75,"02000");
+        DataSlot.startSequence1.put(77,"01001");
+        DataSlot.startSequence1.put(79,"01000");
+        DataSlot.startSequence1.put(81,"03009");
+        DataSlot.startSequence1.put(83,"03008");
+        DataSlot.startSequence1.put(85,"03007");
+        DataSlot.startSequence1.put(87,"03006");
+        DataSlot.startSequence1.put(89,"03005");
+        DataSlot.startSequence1.put(100,"13002");
+        DataSlot.startSequence1.put(102,"13001");
+        DataSlot.startSequence1.put(104,"13000");
+        DataSlot.startSequence1.put(106,"14002");
+        DataSlot.startSequence1.put(108,"14001");
+        DataSlot.startSequence1.put(110,"14000");
+    */
 }
